@@ -1,0 +1,28 @@
+{
+  "name": "Custom",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "dropShadow": [
+          {
+            "show": true
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FAFAFA"
+              }
+            },
+            "transparency": 14
+          }
+        ]
+      }
+    }
+  }
+}

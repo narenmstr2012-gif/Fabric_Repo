@@ -1,0 +1,31 @@
+table shoppingmart_gold_reviews
+	lineageTag: 7b15f66f-87c4-4733-bfd7-797de5455ec2
+	sourceLineageTag: [dbo].[shoppingmart_gold_reviews]
+
+	column product_id
+		dataType: string
+		lineageTag: 7a87d582-cfe3-4b75-b725-a916470d88e3
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgRating
+		dataType: double
+		lineageTag: c317215a-5af8-434b-9128-1857c186806c
+		sourceLineageTag: AvgRating
+		summarizeBy: none
+		sourceColumn: AvgRating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition shoppingmart_gold_reviews = entity
+		mode: directLake
+		source
+			entityName: shoppingmart_gold_reviews
+			schemaName: dbo
+			expressionSource: 'DirectLake - ShoppingMart_GoldLayer'
+

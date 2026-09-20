@@ -1,0 +1,17 @@
+relationship b2e0c8bc-2709-34ac-4e72-17ebdcccdfbe
+	fromColumn: shoppingmart_gold_orders.ProductID
+	toColumn: shoppingmart_gold_reviews.product_id
+
+relationship 85656e98-5846-00d0-74bb-6c6be071dc71
+	fromColumn: shoppingmart_gold_orders.CustomerID
+	toColumn: shoppingmart_gold_web_logs.user_id
+
+relationship d3fdca9e-9c9e-4c77-9beb-9db923e24b69
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DateTable.Date
+	toColumn: LocalDateTable_2741579f-762f-4d3f-9dc0-0828e949a34f.Date
+
+relationship e34668a5-9219-8a35-31af-4e171c0073f5
+	fromColumn: shoppingmart_gold_orders.OrderDate
+	toColumn: DateTable.Date
+

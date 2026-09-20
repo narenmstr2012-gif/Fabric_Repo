@@ -1,0 +1,285 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "formatSettings": {
+              "type": "JsonReadSettings"
+            },
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "HttpServerLocation",
+                  "relativeUrl": "refs/heads/main/ShoppingMart_UnstructuredMetaData.json"
+                }
+              },
+              "schema": {},
+              "externalReferences": {
+                "connection": "0a659029-0e11-4ed1-a3af-fe0869093fae"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "JsonSink",
+            "formatSettings": {
+              "type": "JsonWriteSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseWriteSettings"
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "ShoppingMart_SourceMetaData",
+                  "fileName": "UnStructuredDataFiles"
+                }
+              },
+              "schema": {},
+              "linkedService": {
+                "name": "ShoppingMart_BronzeLayer",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_shoppingMart_Metadatafiles",
+        "dependsOn": []
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "formatSettings": {
+              "type": "JsonReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": false,
+              "enablePartitionDiscovery": false
+            }
+          },
+          "datasetSettings": {
+            "type": "Json",
+            "typeProperties": {
+              "location": {
+                "type": "LakehouseLocation",
+                "folderPath": "ShoppingMart_SourceMetaData",
+                "fileName": "UnStructuredDataFiles"
+              }
+            },
+            "schema": {},
+            "linkedService": {
+              "name": "ShoppingMart_BronzeLayer",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Files"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Lookup_ShoppingMart_MetaDataUnStructured",
+        "dependsOn": []
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup_ShoppingMart_MetaDataUnStructured').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Delete",
+              "typeProperties": {
+                "enableLogging": false,
+                "datasetSettings": {
+                  "type": "Binary",
+                  "typeProperties": {
+                    "location": {
+                      "type": "LakehouseLocation",
+                      "folderPath": {
+                        "value": "@item().sink_folder",
+                        "type": "Expression"
+                      },
+                      "fileName": {
+                        "value": "@item().sink_file",
+                        "type": "Expression"
+                      }
+                    }
+                  },
+                  "linkedService": {
+                    "name": "ShoppingMart_BronzeLayer",
+                    "properties": {
+                      "type": "Lakehouse",
+                      "typeProperties": {
+                        "artifactId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+                        "workspaceId": "00000000-0000-0000-0000-000000000000",
+                        "rootFolder": "Files"
+                      },
+                      "annotations": []
+                    }
+                  },
+                  "annotations": []
+                },
+                "storeSettings": {
+                  "type": "AzureBlobStorageReadSettings",
+                  "recursive": false,
+                  "enablePartitionDiscovery": false
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "DeleteExistingfiles",
+              "dependsOn": []
+            },
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "JsonSource",
+                  "formatSettings": {
+                    "type": "JsonReadSettings"
+                  },
+                  "storeSettings": {
+                    "type": "HttpReadSettings",
+                    "requestMethod": "GET"
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "HttpServerLocation",
+                        "relativeUrl": {
+                          "value": "@item().source_url",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "externalReferences": {
+                      "connection": "0a659029-0e11-4ed1-a3af-fe0869093fae"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "JsonSink",
+                  "formatSettings": {
+                    "type": "JsonWriteSettings"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@item().sink_folder",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@item().sink_file",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "linkedService": {
+                      "name": "ShoppingMart_BronzeLayer",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Copy_shoppingMart_MetadatafilesUsingAPI",
+              "dependsOn": [
+                {
+                  "activity": "DeleteExistingfiles",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "name": "ForEachSourceStructuredFile",
+        "dependsOn": [
+          {
+            "activity": "Lookup_ShoppingMart_MetaDataUnStructured",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

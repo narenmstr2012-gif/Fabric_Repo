@@ -1,0 +1,80 @@
+[
+  {
+    "name": "ShoppingMart_Bronze_Web_Logs",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Web_Logs",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "ShoppingMart_Bronze_Social_Media",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Social_Media",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "ShoppingMart_Bronze_Reviews",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Reviews",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "ShoppingMart_Bronze_Products",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Products",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "ShoppingMart_Bronze_Orders",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Orders",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  },
+  {
+    "name": "ShoppingMart_Bronze_Customers",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/ShoppingMart_Bronze_Customers",
+        "itemId": "ae8cc1c6-ac88-96c6-48ba-f1a6889b5dde",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  }
+]

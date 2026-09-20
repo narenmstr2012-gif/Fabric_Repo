@@ -1,0 +1,39 @@
+table shoppingmart_gold_social_media
+	lineageTag: 4a7afc21-b50b-47ad-90c7-b9cd43e617b2
+	sourceLineageTag: [dbo].[shoppingmart_gold_social_media]
+
+	column platform
+		dataType: string
+		lineageTag: 15866159-8618-4a1f-8261-a2cdc8e6f3bc
+		sourceLineageTag: platform
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: fdaa1767-2f3c-4ae0-9bfd-ec95e982c94e
+		sourceLineageTag: sentiment
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column count
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ada908b-9c5d-43ef-8e32-ad1c9cf891c2
+		sourceLineageTag: count
+		summarizeBy: sum
+		sourceColumn: count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition shoppingmart_gold_social_media = entity
+		mode: directLake
+		source
+			entityName: shoppingmart_gold_social_media
+			schemaName: dbo
+			expressionSource: 'DirectLake - ShoppingMart_GoldLayer'
+

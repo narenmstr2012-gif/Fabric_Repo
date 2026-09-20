@@ -1,0 +1,174 @@
+table shoppingmart_gold_orders
+	lineageTag: d9d40c7b-105b-4178-aaf1-9c898e313cef
+	sourceLineageTag: [dbo].[shoppingmart_gold_orders]
+
+	column ProductID
+		dataType: string
+		lineageTag: 3aebdb8d-b724-4509-bd67-6d8de9773837
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		lineageTag: c8b85dd9-89db-40aa-8d7b-75852ad34534
+		sourceLineageTag: CustomerID
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: string
+		lineageTag: 68336517-e8c9-4c1d-b962-705b9954389f
+		sourceLineageTag: OrderID
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 5b9ebda1-9520-4bfa-9826-8bbe3c922cdb
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fb31fe0-94ce-4c53-8756-ccb9b99f594d
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalAmount
+		dataType: int64
+		formatString: 0
+		lineageTag: 16897f04-37dc-47e4-8d4d-9c07754a7dcc
+		sourceLineageTag: TotalAmount
+		summarizeBy: sum
+		sourceColumn: TotalAmount
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: e187471b-94c5-44af-9811-32cae9018c78
+		sourceLineageTag: PaymentMethod
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		lineageTag: d22b2478-766c-4421-9694-462fe58b2be5
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: bb18fd4d-c8cc-4f34-8cac-9850afffb69a
+		sourceLineageTag: Email
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 8c7b696d-d163-4825-8bf1-219ab1700685
+		sourceLineageTag: Location
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignupDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0daca648-c02f-454b-a3e5-f10f295fe9af
+		sourceLineageTag: SignupDate
+		summarizeBy: none
+		sourceColumn: SignupDate
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ProductName
+		dataType: string
+		lineageTag: 2d81e701-e0a7-4ae6-8ab0-a98d8b6808dd
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 4aa6ea7e-f250-40eb-923a-43d3294282b3
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stock
+		dataType: double
+		lineageTag: de835941-3005-44b0-922d-e25e7a8ef56f
+		sourceLineageTag: Stock
+		summarizeBy: sum
+		sourceColumn: Stock
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UnitPrice
+		dataType: double
+		lineageTag: 78cc5d7f-5b9c-408f-aa8e-710a56ada665
+		sourceLineageTag: UnitPrice
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition shoppingmart_gold_orders = entity
+		mode: directLake
+		source
+			entityName: shoppingmart_gold_orders
+			schemaName: dbo
+			expressionSource: 'DirectLake - ShoppingMart_GoldLayer'
+

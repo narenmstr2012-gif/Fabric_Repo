@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DirectLake - ShoppingMart_GoldLayer"]
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","TMDLView_Desktop"]
+
+ref table shoppingmart_gold_social_media
+ref table shoppingmart_gold_orders
+ref table shoppingmart_gold_web_logs
+ref table shoppingmart_gold_reviews
+ref table DateTable
+ref table DateTableTemplate_9f848cf1-2104-4de3-911a-e124e77df1b3
+ref table LocalDateTable_2741579f-762f-4d3f-9dc0-0828e949a34f
+
